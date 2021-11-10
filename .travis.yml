@@ -2,11 +2,6 @@ language: python
 python:
   - 3.9
 
-serices:
-  postgresql
-addons:
-  postgresql: '9.5'
-
 env:
   -PIPENV_VENV_PROJECT=1
   -PIPENV_IGNORE_VIRTUALENVS=1
@@ -15,12 +10,8 @@ install:
   - pip install -q pipenv codecov
   - pipenv sync --dev
 
-before_script:
-  - psql -c "CREATE DATABASE testdb;" -U postgres
-
 script:
   - pipenv run flake8
-  - pipenv run pytest --cov=pypro
 
 after_success:
   - pipenv run codecov
