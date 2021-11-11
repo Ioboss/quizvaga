@@ -5,3 +5,6 @@ utilizando o Heroku para publicação!
 -Pipenv
 -Django
 -Flake8
+-Travis Ci
+-Heroku, deploy automatico
+
