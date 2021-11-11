@@ -92,3 +92,18 @@ class User(AbstractBaseUser, PermissionsMixin):
     def email_user(self, subject, message, from_email=None, **kwargs):
         """Send an email to this user."""
         send_mail(subject, message, from_email, [self.email], **kwargs)
+
+
+class Pergunta(models.Model):
+    enunciado = models.TextField()
+    alternativas = models.JSONField()
+    disponivel = models.BooleanField(default=False)
+    alternativa_correta = models.IntegerField(choices=[
+        (0, 'A'),
+        (1, 'B'),
+        (2, 'C'),
+        (3, 'D'),
+    ])
+
+    def __str__(self):
+        return self.enunciado
