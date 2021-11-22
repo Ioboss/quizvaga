@@ -112,4 +112,19 @@ class Pergunta(models.Model):
 class Aluno(models.Model):
     nome = models.CharField(max_length=64)
     email = models.EmailField(unique=True)
-    criado_em = models.DateField(auto_now_add=True)
+    criado_em = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.email
+
+
+class Resposta(models.Model):
+    aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE)
+    pergunta = models.ForeignKey(Pergunta, on_delete=models.CASCADE)
+    pontos = models.IntegerField()
+    respondia_em = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['aluno', 'pergunta'], name='resposta_unica')
+        ]
